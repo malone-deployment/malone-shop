@@ -30,8 +30,7 @@ export function Login() {
 
     if (inputEmail && inputPassword) {
       try {
-        const url =
-          "https://script.google.com/macros/s/AKfycbx9VQRAfoN_71JPl77jynNfYpnzKSQQKZs8-LNWg-9BlexMG1Oq9oZStm9PtE40DTE0/exec";
+        const url = String(process.env.API_ENDPOINT);
 
         const response = await fetch(url, {
           method: "POST",

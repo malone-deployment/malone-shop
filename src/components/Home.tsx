@@ -16,9 +16,7 @@ export function Home() {
   }
 
   useEffect(() => {
-    fetch(
-      "https://script.google.com/macros/s/AKfycbx9VQRAfoN_71JPl77jynNfYpnzKSQQKZs8-LNWg-9BlexMG1Oq9oZStm9PtE40DTE0/exec"
-    )
+    fetch(String(process.env.API_ENDPOINT))
       .then((res) => res.json())
       .then((res) => {
         setData(res);

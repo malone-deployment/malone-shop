@@ -51,6 +51,8 @@ env:
   MALONE_SHOP_IMAGE: "malone-shop-image" # backend image name
   MALONE_SHOP_SERVICE: "malone-shop-service" # Cloud Run service name
 
+  API_ENDPOINT: "https://script.google.com/macros/s/AKfycbx9VQRAfoN_71JPl77jynNfYpnzKSQQKZs8-LNWg-9BlexMG1Oq9oZStm9PtE40DTE0/exec"
+
   # POSTGRES_CLOUDSQL_INSTANCE: ${{ secrets.POSTGRES_CLOUDSQL_INSTANCE }}
   # POSTGRES_INSTANCE_UNIX_SOCKET: ${{ secrets.POSTGRES_INSTANCE_UNIX_SOCKET }}
   # POSTGRES_INSTANCE_CONNECTION_NAME: ${{ secrets.POSTGRES_INSTANCE_CONNECTION_NAME }}
@@ -99,7 +101,9 @@ jobs:
           --update-labels managed-by=github-actions,commit-sha="${{ github.sha }}" \
           --region "${{ env.REGION }}" \
           --service-account "${{ env.SERVICE_EMAIL }}" \
-          --allow-unauthenticated
+          --allow-unauthenticated \
+          --set-env-vars API_ENDPOINT="${{ env.API_ENDPOINT }}"
+
       - name: "Show output"
         run: |-
           echo "Cloud Run service deployed to:"
