@@ -34,7 +34,7 @@ export default defineConfig({
 //     },
 //     server: {
 //       open: true, // Automatically open browser in dev mode
-//       port: 3000, // Define the port for development server
+//       port: 8080, // Define the port for development server
 //     },
 //   };
 // });
