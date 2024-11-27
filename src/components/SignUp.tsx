@@ -35,7 +35,7 @@ export function SignUp() {
 
   function handleSubmit(event: any) {
     if (inputfirstName && inputLastName && inputEmail && inputPassword) {
-      const url = String(process.env.API_ENDPOINT);
+      const url = `${process.env.API_ENDPOINT}`;
       if (!url) {
         throw new Error("API_ENDPOINT is not defined.");
       }

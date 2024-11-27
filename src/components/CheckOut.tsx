@@ -36,7 +36,7 @@ export function CheckOut() {
       purchases: purchaseList,
     };
 
-    const url = process.env.API_ENDPOINT;
+    const url = `${process.env.API_ENDPOINT}`;
     if (!url) {
       throw new Error("API_ENDPOINT is not defined.");
     }
