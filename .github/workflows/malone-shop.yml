@@ -102,12 +102,16 @@ jobs:
           --region "${{ env.REGION }}" \
           --service-account "${{ env.SERVICE_EMAIL }}" \
           --allow-unauthenticated \
-          --set-env-vars API_ENDPOINT="${{ env.API_ENDPOINT }}"
+          --set-env-vars API_ENDPOINT="https://script.google.com/macros/s/AKfycbx9VQRAfoN_71JPl77jynNfYpnzKSQQKZs8-LNWg-9BlexMG1Oq9oZStm9PtE40DTE0/exec"
+
+      - name: Debug API_ENDPOINT
+        run: echo "API_ENDPOINT=${{ env.API_ENDPOINT }}"
 
       - name: "Show output"
         run: |-
           echo "Cloud Run service deployed to:"
           echo "${{ steps.deploy.outputs.url }}"
+      #--set-env-vars API_ENDPOINT="${{ env.API_ENDPOINT }}"
       # BACKEND
       # - name: "Build and Push backend Image to Artifact Registry"
       #   run: |-
