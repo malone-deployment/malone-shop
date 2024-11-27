@@ -6,7 +6,6 @@ export function CheckOut() {
   const navigate = useNavigate();
   const localData = localStorage.getItem("key");
   const finalData = JSON.parse(localData || "{}");
-
   const { listItem, counter, addItem, removeItem } = useListItem(
     (state) => state
   );
@@ -37,7 +36,11 @@ export function CheckOut() {
       purchases: purchaseList,
     };
 
-    const url = String(process.env.API_ENDPOINT);
+    const url = process.env.API_ENDPOINT;
+    if (!url) {
+      throw new Error("API_ENDPOINT is not defined.");
+    }
+
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",

@@ -16,7 +16,11 @@ export function Home() {
   }
 
   useEffect(() => {
-    fetch(String(process.env.API_ENDPOINT))
+    const url = process.env.API_ENDPOINT;
+    if (!url) {
+      throw new Error("API_ENDPOINT is not defined.");
+    }
+    fetch(url)
       .then((res) => res.json())
       .then((res) => {
         setData(res);
