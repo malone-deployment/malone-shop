@@ -48,8 +48,8 @@ env:
   WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }} # Workload Identity Provider
   GAR_REPOSITORY_NAME: ${{ secrets.GAR_REPOSITORY_NAME }} # Artifact Registry repository
 
-  COLOR_TIME_IMAGE: "color-time-image" # backend image name
-  COLOR_TIME_SERVICE: "color-time-service" # Cloud Run service name
+  MALONE_SHOP_IMAGE: "malone-shop-image" # backend image name
+  MALONE_SHOP_SERVICE: "malone-shop-service" # Cloud Run service name
 
   # POSTGRES_CLOUDSQL_INSTANCE: ${{ secrets.POSTGRES_CLOUDSQL_INSTANCE }}
   # POSTGRES_INSTANCE_UNIX_SOCKET: ${{ secrets.POSTGRES_INSTANCE_UNIX_SOCKET }}
@@ -88,14 +88,14 @@ jobs:
         #WEB
       - name: "Build and Push web Image to Artifact Registry"
         run: |-
-          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPOSITORY_NAME }}/${{ env.COLOR_TIME_IMAGE }}:${{ github.sha }}"
+          DOCKER_TAG="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPOSITORY_NAME }}/${{ env.MALONE_SHOP_IMAGE }}:${{ github.sha }}"
           docker build -f ./Dockerfile -t "${DOCKER_TAG}" .
           gcloud auth configure-docker '${{ env.REGION }}-docker.pkg.dev'
           docker push "${DOCKER_TAG}"
       - name: "Deploy web Image to Cloud Run"
         run: |-
-          gcloud run deploy "${{ env.COLOR_TIME_SERVICE }}" \
-          --image "${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPOSITORY_NAME }}/${{ env.COLOR_TIME_IMAGE }}:${{ github.sha }}" \
+          gcloud run deploy "${{ env.MALONE_SHOP_SERVICE }}" \
+          --image "${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_REPOSITORY_NAME }}/${{ env.MALONE_SHOP_IMAGE }}:${{ github.sha }}" \
           --update-labels managed-by=github-actions,commit-sha="${{ github.sha }}" \
           --region "${{ env.REGION }}" \
           --service-account "${{ env.SERVICE_EMAIL }}" \
