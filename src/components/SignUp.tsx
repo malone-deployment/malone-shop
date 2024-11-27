@@ -35,10 +35,9 @@ export function SignUp() {
 
   function handleSubmit(event: any) {
     if (inputfirstName && inputLastName && inputEmail && inputPassword) {
-      const url = `${process.env.API_ENDPOINT}`;
-      if (!url) {
-        throw new Error("API_ENDPOINT is not defined.");
-      }
+      const url =
+        "https://script.google.com/macros/s/AKfycbx9VQRAfoN_71JPl77jynNfYpnzKSQQKZs8-LNWg-9BlexMG1Oq9oZStm9PtE40DTE0/exec";
+
       fetch(url, {
         method: "POST",
         mode: "cors",
